@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers";
 import thunk from "redux-thunk";
-// import async from 'middlewares/async';
+import reduxPromise from 'redux-promise';
 // import stateValidator from "middlewares/stateValidator";
 
 const composeEnhancers = 
@@ -14,7 +14,7 @@ export const Root = ({ children, initialState }) => {
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(thunk))
+    composeEnhancers(applyMiddleware(thunk, reduxPromise))
   );
   return (
     <Provider store={store}>

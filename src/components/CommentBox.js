@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import * as actions from '../store/actions/commentActions';
+import { connect } from "react-redux";
+import * as actions from "../store/actions/commentActions";
 
 class CommentBox extends Component {
   state = {
@@ -16,7 +16,7 @@ class CommentBox extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.saveComment(this.state.comment)
+    this.props.saveComment(this.state.comment);
     this.setState({
       ...this.state,
       comment: ""
@@ -25,24 +25,31 @@ class CommentBox extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4>Leave a comment</h4>
-        <textarea
-          cols="30"
-          rows="10"
-          value={this.state.comment}
-          onChange={this.handleChange}
-        />
-        <button>Submit Comment</button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h4>Leave a comment</h4>
+          <textarea
+            cols="30"
+            rows="10"
+            value={this.state.comment}
+            onChange={this.handleChange}
+          />
+          <button>Submit Comment</button>
+        </form>
+        <button onClick={this.props.fetchComments}>Fetch Comment</button>
+      </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    saveComment: (comment) => dispatch(actions.saveComment(comment))
-  }
+    saveComment: comment => dispatch(actions.saveComment(comment)),
+    fetchComments: () => dispatch(actions.fetchComments())
+  };
 };
 
-export default connect(null, mapDispatchToProps)(CommentBox);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CommentBox);
