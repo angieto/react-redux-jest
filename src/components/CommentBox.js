@@ -36,7 +36,9 @@ class CommentBox extends Component {
           />
           <button>Submit Comment</button>
         </form>
-        <button onClick={this.props.fetchComments}>Fetch Comment</button>
+        <button className="fetchComments" onClick={this.props.fetchComments}>
+          Fetch Comment
+        </button>
       </div>
     );
   }
